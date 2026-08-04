@@ -4,6 +4,39 @@ services:
     build: .
     container_name: crest-lab
     hostname: CREST
+    restart: unless-stopped
+
     ports:
       - "8081:80"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.10
+
+
+  smb-target:
+    build:
+      context: ./services/smb
+
+    container_name: crest-smb
+    hostname: NW-FILE01
     restart: unless-stopped
+
+    ports:
+      - "139:139"
+      - "445:445"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.20
+
+
+networks:
+
+  crest-network:
+
+    driver: bridge
+
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24

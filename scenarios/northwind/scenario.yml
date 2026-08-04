@@ -1,0 +1,26 @@
+name: Northwind Manufacturing
+
+network:
+  subnet: 172.30.0.0/24
+
+hosts:
+
+  portal:
+    hostname: CREST
+    ip: 172.30.0.10
+
+  smb:
+    hostname: NW-FILE01
+    ip: 172.30.0.20
+
+  ftp:
+    hostname: NW-FTP01
+    ip: 172.30.0.30
+
+  ldap:
+    hostname: NW-DC01
+    ip: 172.30.0.40
+
+  smtp:
+    hostname: NW-MAIL01
+    ip: 172.30.0.50

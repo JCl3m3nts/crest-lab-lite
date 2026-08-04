@@ -15,11 +15,11 @@ RUN apt update && apt install -y \
 
 WORKDIR /crest
 
-COPY requirements.txt .
+COPY portal/requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-COPY app /crest/app
+COPY portal/app /crest/app
 COPY data /crest/data
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
