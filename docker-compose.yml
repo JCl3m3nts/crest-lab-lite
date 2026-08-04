@@ -1,0 +1,9 @@
+services:
+
+  crest:
+    build: .
+    container_name: crest-lab
+    hostname: CREST
+    ports:
+      - "8081:80"
+    restart: unless-stopped
