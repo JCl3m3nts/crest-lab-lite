@@ -1,0 +1,52 @@
+body {
+
+font-family: Arial;
+
+margin:40px;
+
+background:#111;
+
+color:white;
+
+}
+
+
+table {
+
+border-collapse:collapse;
+
+width:100%;
+
+}
+
+
+td,th {
+
+border:1px solid #555;
+
+padding:10px;
+
+}
+
+
+a {
+
+color:#00ff99;
+
+}
+
+
+input {
+
+padding:10px;
+
+width:300px;
+
+}
+
+
+button {
+
+padding:10px;
+
+}

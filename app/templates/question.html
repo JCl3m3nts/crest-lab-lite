@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Question</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<h1>
+Question {{question.id}}
+</h1>
+
+
+<h2>
+{{question.category}}
+</h2>
+
+
+<p>
+{{question.question}}
+</p>
+
+
+<form method="POST">
+
+<input 
+type="text"
+name="answer"
+placeholder="Enter answer">
+
+
+<button>
+Submit
+</button>
+
+
+</form>
+
+
+{% if result == "correct" %}
+
+<h2>
+✔ Correct
+</h2>
+
+
+{% elif result == "incorrect" %}
+
+<h2>
+✖ Incorrect
+</h2>
+
+<p>
+Hint:
+{{question.hint}}
+</p>
+
+{% endif %}
+
+
+<a href="/">
+Back
+</a>
+
+
+</body>
+
+</html>

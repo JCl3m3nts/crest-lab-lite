@@ -20,6 +20,7 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY app /crest/app
+COPY data /crest/data
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
