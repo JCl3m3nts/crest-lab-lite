@@ -1,23 +1,24 @@
-from flask import Flask, render_template, request, redirect
-import json
-import os
+from flask import Flask, render_template, request
+
+from database import (
+    get_questions,
+    get_question,
+    get_trophy,
+    check_answer,
+    save_progress,
+    get_progress,
+    get_progress_summary
+)
 
 
 app = Flask(__name__)
 
 
-QUESTION_FILE = "/crest/data/questions.json"
-
-
-def load_questions():
-    with open(QUESTION_FILE, "r") as file:
-        return json.load(file)
-
-
 @app.route("/")
 def index():
 
-    questions = load_questions()
+    questions = get_questions()
+    trophy = get_trophy(id)
 
     return render_template(
         "index.html",
@@ -28,37 +29,78 @@ def index():
 @app.route("/question/<int:id>", methods=["GET", "POST"])
 def question(id):
 
-    questions = load_questions()
-
-    current = next(
-        (q for q in questions if q["id"] == id),
-        None
-    )
+    current = get_question(id)
 
     if current is None:
         return "Question not found", 404
 
 
     result = None
+    hint = None
 
 
     if request.method == "POST":
 
-        answer = request.form["answer"].lower().strip()
+        action = request.form.get("action")
 
-        if answer == current["answer"].lower():
-            result = "correct"
-        else:
-            result = "incorrect"
+
+        if action == "answer":
+
+            answer = request.form["answer"]
+
+            if check_answer(
+                trophy["trophy_value"],
+                answer
+            ):
+                result = "correct"
+                save_progress(id)
+
+            else:
+                result = "incorrect"
+
+
+        elif action == "hint":
+
+            hint_number = int(
+                request.form.get("hint_number", 1)
+            )
+
+
+            if hint_number == 1:
+                hint = current["hint1"]
+
+            elif hint_number == 2:
+                hint = current["hint2"]
+
+            elif hint_number == 3:
+                hint = current["hint3"]
+
 
 
     return render_template(
         "question.html",
         question=current,
-        result=result
+        result=result,
+        hint=hint
     )
 
 
+@app.route("/progress")
+def progress():
+
+    questions = get_progress_summary()
+
+    completed = sum(
+        1 for q in questions
+        if q["completed"]
+    )
+
+    return render_template(
+        "progress.html",
+        questions=questions,
+        completed=completed,
+        total=len(questions)
+    )
 if __name__ == "__main__":
 
     app.run(

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>CREST Lab Progress</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<h1>CREST Lab Progress</h1>
+
+<p>
+Completed: {{ completed }} / {{ total }}
+</p>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>Status</th>
+</tr>
+
+{% for q in questions %}
+
+<tr>
+
+<td>{{ q.id }}</td>
+
+<td>{{ q.question }}</td>
+
+<td>
+
+{% if q.completed %}
+
+✅ Complete
+
+{% else %}
+
+❌ Incomplete
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">← Back to Home</a>
+
+</body>
+
+</html>

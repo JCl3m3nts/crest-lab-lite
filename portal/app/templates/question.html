@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-
 <html>
 
 <head>
-
-<title>Question</title>
-
-<link rel="stylesheet" href="/static/css/style.css">
-
+<title>CREST Challenge</title>
 </head>
 
 
 <body>
 
-
-<h1>
-Question {{question.id}}
-</h1>
-
-
-<h2>
-{{question.category}}
-</h2>
+<h1>{{question.category}} Challenge</h1>
 
 
 <p>
@@ -29,46 +15,76 @@ Question {{question.id}}
 </p>
 
 
+<p>
+Points: {{question.points}}
+</p>
+
+
+{% if result %}
+
+<h2>
+{{result}}
+</h2>
+
+{% endif %}
+
+
+
 <form method="POST">
 
 <input 
 type="text"
 name="answer"
-placeholder="Enter answer">
+placeholder="Enter trophy"
+/>
 
+<input 
+type="hidden"
+name="action"
+value="answer"
+/>
 
-<button>
-Submit
+<button type="submit">
+Submit Answer
 </button>
-
 
 </form>
 
 
-{% if result == "correct" %}
 
-<h2>
-✔ Correct
-</h2>
+<h3>Need help?</h3>
 
 
-{% elif result == "incorrect" %}
+<form method="POST">
 
-<h2>
-✖ Incorrect
-</h2>
+<input 
+type="hidden"
+name="action"
+value="hint"
+/>
+
+<input 
+type="hidden"
+name="hint_number"
+value="1"
+/>
+
+<button type="submit">
+Show Hint 1
+</button>
+
+</form>
+
+
+
+{% if hint %}
 
 <p>
-Hint:
-{{question.hint}}
+<strong>Hint:</strong>
+{{hint}}
 </p>
 
 {% endif %}
-
-
-<a href="/">
-Back
-</a>
 
 
 </body>
