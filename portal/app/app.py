@@ -30,6 +30,7 @@ def index():
 def question(id):
 
     current = get_question(id)
+    trophy = get_trophy(id)
 
     if current is None:
         return "Question not found", 404
