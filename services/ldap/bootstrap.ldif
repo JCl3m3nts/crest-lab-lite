@@ -1,0 +1,11 @@
+dn: ou=People,dc=northwind,dc=local
+objectClass: organizationalUnit
+ou: People
+
+dn: uid=jdoe,ou=People,dc=northwind,dc=local
+objectClass: inetOrgPerson
+cn: John Doe
+sn: Doe
+uid: jdoe
+mail: jdoe@northwind.local
+description: CREST-LDAP-59381

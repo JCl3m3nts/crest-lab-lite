@@ -70,10 +70,27 @@ def get_trophy(question_id):
 
 
 
-def check_answer(correct, supplied):
+def validate_trophy(question_id, supplied):
 
-    return correct.lower().strip() == supplied.lower().strip()
+    conn = get_connection()
 
+    trophy = conn.execute(
+        """
+        SELECT trophy_value
+        FROM trophies
+        WHERE question_id = ?
+        """,
+        (question_id,)
+    ).fetchone()
+
+    conn.close()
+
+
+    if trophy is None:
+        return False
+
+
+    return trophy["trophy_value"].lower().strip() == supplied.lower().strip()
 
 
 def save_progress(question_id):

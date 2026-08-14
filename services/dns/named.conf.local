@@ -1,0 +1,8 @@
+zone "northwind.local" {
+    type master;
+    file "/etc/bind/db.northwind.local";
+
+    allow-transfer {
+        any;
+    };
+};

@@ -4,10 +4,10 @@ from database import (
     get_questions,
     get_question,
     get_trophy,
-    check_answer,
     save_progress,
     get_progress,
-    get_progress_summary
+    get_progress_summary,
+    validate_trophy
 )
 
 
@@ -18,13 +18,11 @@ app = Flask(__name__)
 def index():
 
     questions = get_questions()
-    trophy = get_trophy(id)
 
     return render_template(
         "index.html",
         questions=questions
     )
-
 
 @app.route("/question/<int:id>", methods=["GET", "POST"])
 def question(id):
@@ -49,8 +47,8 @@ def question(id):
 
             answer = request.form["answer"]
 
-            if check_answer(
-                trophy["trophy_value"],
+            if validate_trophy(
+                id,
                 answer
             ):
                 result = "correct"

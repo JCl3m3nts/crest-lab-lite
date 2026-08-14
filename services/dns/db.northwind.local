@@ -1,0 +1,20 @@
+$TTL 86400
+
+@   IN SOA dns.northwind.local. admin.northwind.local. (
+        2026080501
+        3600
+        1800
+        604800
+        86400
+)
+
+@       IN NS dns.northwind.local.
+
+dns     IN A 172.30.0.60
+
+www     IN A 172.30.0.40
+files   IN A 172.30.0.20
+ftp     IN A 172.30.0.30
+git     IN A 172.30.0.50
+
+secret  IN TXT "CREST-DNS-78124"

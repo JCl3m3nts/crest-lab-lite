@@ -13,7 +13,6 @@ services:
       crest-network:
         ipv4_address: 172.30.0.10
 
-
   smb-target:
     build:
       context: ./services/smb
@@ -29,6 +28,213 @@ services:
     networks:
       crest-network:
         ipv4_address: 172.30.0.20
+
+  ftp-target:
+    build:
+      context: ./services/ftp
+      dockerfile: Dockerfile
+
+    container_name: crest-ftp
+    hostname: FTP-SERVER01
+    restart: unless-stopped
+
+    ports:
+      - "21:21"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.30
+
+  http-target:
+    build:
+      context: ./services/http
+      dockerfile: Dockerfile
+
+    container_name: crest-http
+    hostname: WEB-SERVER01
+    restart: unless-stopped
+
+    ports:
+      - "8080:80"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.40
+
+  ssh-target:
+    build:
+      context: ./services/ssh
+      dockerfile: Dockerfile
+
+    container_name: crest-ssh
+    hostname: LINUX-JUMP01
+    restart: unless-stopped
+
+    ports:
+      - "2222:22"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.50
+
+  dns-target:
+    build:
+      context: ./services/dns
+      dockerfile: Dockerfile
+
+    container_name: crest-dns
+    hostname: DNS-SERVER01
+    restart: unless-stopped
+
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.60
+
+
+  ldap-target:
+
+    build:
+      context: ./services/ldap
+      dockerfile: Dockerfile
+
+    container_name: crest-ldap
+    hostname: LDAP-SERVER01
+
+    environment:
+      LDAP_ORGANISATION: "Northwind Manufacturing"
+      LDAP_DOMAIN: "northwind.local"
+      LDAP_ADMIN_PASSWORD: "Password123!"
+
+    ports:
+      - "389:389"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.70
+
+  snmp-target:
+    build:
+      context: ./services/snmp
+      dockerfile: Dockerfile
+
+    container_name: crest-snmp
+    hostname: SNMP01
+
+    restart: unless-stopped
+
+    ports:
+      - "161:161/udp"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.90
+
+
+  telnet-target:
+
+    build:
+      context: ./services/telnet
+      dockerfile: Dockerfile
+
+    container_name: crest-telnet
+    hostname: TELNET-SERVER01
+
+    restart: unless-stopped
+
+    ports:
+      - "23:23"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.100
+
+  finger-target:
+    build:
+      context: ./services/finger
+      dockerfile: Dockerfile
+
+    container_name: crest-finger
+    hostname: FINGER-SERVER01
+
+    restart: unless-stopped
+
+    ports:
+      - "79:79"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.110
+
+
+  rsh-target:
+    build:
+      context: ./services/rsh
+      dockerfile: Dockerfile
+
+    container_name: crest-rsh
+    hostname: RSH-SERVER01
+
+    restart: unless-stopped
+
+    ports:
+      - "514:514"
+
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.120
+
+
+
+  rdp-target:
+    build:
+      context: ./services/rdp
+    container_name: crest-rdp
+    hostname: NW-RDP-001
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.130
+    ports:
+      - "3389:3389"
+    restart: unless-stopped
+
+  smtp-target:
+    build:
+      context: ./services/smtp
+    container_name: crest-smtp
+    hostname: smtp.northwind.local
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.140
+    ports:
+      - "25:25"
+
+
+
+  pop3-target:
+    build: ./services/pop3
+    container_name: crest-pop3
+    hostname: pop3.northwind.local
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.150
+    ports:
+      - "110:110"
+
+
+  imaps-target:
+    build: ./services/imaps
+    container_name: crest-imaps
+    hostname: imap.northwind.local
+    networks:
+      crest-network:
+        ipv4_address: 172.30.0.160
+    ports:
+      - "993:993"
+
 
 
 networks:
