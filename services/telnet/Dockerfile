@@ -13,6 +13,15 @@ COPY trophy.txt /opt/trophy.txt
 
 RUN chmod 644 /opt/trophy.txt
 
+# Deliberate CREST-Lab enumeration clue: credentials are exposed by the
+# Telnet service banner so learners can discover them after connecting.
+RUN printf '%s\n' \
+    'Northwind Manufacturing - Telnet Training Service' \
+    'Training credentials:' \
+    'Username: operator' \
+    'Password: Northwind123!' \
+    > /etc/issue
+
 RUN echo "telnet stream tcp nowait root /usr/sbin/telnetd telnetd" \
     > /etc/inetd.conf
 
