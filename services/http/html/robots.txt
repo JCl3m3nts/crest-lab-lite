@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /secret/
+
+# CREST-Lab training hint
+# See the secret directory for the training trophy.
