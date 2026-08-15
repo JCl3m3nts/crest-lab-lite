@@ -15,6 +15,12 @@ COPY trophies /opt/trophies
 
 RUN chmod -R 755 /opt/trophies
 
+# CREST-Lab training clue: expose the deliberately seeded lab credentials
+# through the SSH version banner so basic Nmap service enumeration reveals them.
+RUN printf '%s\n' \
+    'VersionAddendum "CREST-Lab credentials: analyst / Password123!"' \
+    >> /etc/ssh/sshd_config
+
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd","-D","-e"]
