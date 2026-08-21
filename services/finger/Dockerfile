@@ -7,7 +7,7 @@ RUN apt-get update && \
     finger \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -c "Sarah Mitchell - IT Support - CREST-FINGER-77421" analyst && \
+RUN useradd -m -c "Sarah Mitchell - IT Support - NW-FINGER-001" analyst && \
     echo "analyst:Northwind123!" | chpasswd
 
 
