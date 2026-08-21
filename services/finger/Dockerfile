@@ -11,6 +11,7 @@ RUN useradd -m -c "Sarah Mitchell - IT Support - CREST-FINGER-77421" analyst && 
     echo "analyst:Northwind123!" | chpasswd
 
 
+COPY trophy.txt /opt/trophy.txt
 RUN printf '%s\n' \
     'finger stream tcp nowait nobody /usr/sbin/in.fingerd in.fingerd' \
     > /etc/inetd.conf
